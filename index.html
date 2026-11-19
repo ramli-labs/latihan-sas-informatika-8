@@ -31,6 +31,7 @@ h2{margin:0 0 10px}
 .btn.big{padding:12px 22px;font-size:17px}
 .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 label.f{display:block;font-weight:600;margin:12px 0 4px}
+input.f{width:100%;padding:10px;border:1px solid #b6c0d4;border-radius:10px;background:#fff;font:inherit;letter-spacing:4px;text-transform:uppercase;-webkit-user-select:text;user-select:text}
 select.f{width:100%;padding:10px;border:1px solid #b6c0d4;border-radius:10px;background:#fff}
 .msg{padding:10px 14px;border-radius:10px;margin-top:12px;font-size:15px}
 .msg.no{background:var(--no2);color:#8e2a20}.msg.ok{background:var(--ok2);color:#135c33}.msg.info{background:var(--warn2);color:#7a5212}
@@ -64,6 +65,13 @@ table.tf td.c{width:82px;text-align:center}
 .tfb{border:1.5px solid #aab4c8;background:#fff;border-radius:8px;padding:4px 12px;font-weight:700}
 .tfb.sel{background:var(--pri);border-color:var(--pri);color:#fff}
 .fig{margin:6px 0 12px;text-align:center}
+code{font-family:ui-monospace,Consolas,'Courier New',monospace;background:#eef1f7;border-radius:5px;padding:1px 6px;font-size:.92em;white-space:pre-wrap}
+pre.kode{font-family:ui-monospace,Consolas,'Courier New',monospace;background:#14233c;color:#e9eef8;border-radius:10px;padding:12px 16px;margin:4px 0 14px;font-size:15px;line-height:1.5;overflow-x:auto;white-space:pre;text-align:left}
+.opt.sel code{background:#d6e2fb}
+.fb{border-radius:12px;padding:12px 16px;margin:14px 0;font-size:15px}
+.fb.hi{background:var(--ok2);color:#135c33}.fb.mid{background:var(--warn2);color:#7a5212}.fb.lo{background:var(--no2);color:#8e2a20}
+.saran{margin:10px 0 0;padding:0;list-style:none}.saran li{background:#fff;border:1px solid var(--line);border-left:4px solid var(--no);border-radius:8px;padding:8px 12px;margin:6px 0;font-size:14.5px;color:var(--ink)}
+.bars .t i.lo{background:var(--no)}.bars .t i.ok{background:var(--ok)}
 .fig svg{max-width:100%;height:auto;background:#fbfcfe;border:1px solid var(--line);border-radius:10px}
 .qfoot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
 .btn.ragu.on{background:#fcc419;border-color:#fcc419}
@@ -98,21 +106,25 @@ table.tf td.c{width:82px;text-align:center}
 const API=(new URLSearchParams(location.search).get('api'))||"https://script.google.com/macros/s/AKfycbx74AxpTPpP48IElR8pyniUbM9ohj5FOmqvF2zyXkXRjH1CAotdrw23ZjmUKpzrdOqq/exec";
 const DURASI_MENIT=90, MAKS_LANGGAR=5;
 const SOAL=[{"tipe": "pg", "bab": "Konsep Data Terstruktur", "s": "Yang dimaksud dengan data terstruktur adalah ...", "o": ["data berupa foto, audio, dan video di galeri", "data yang disusun dengan format tertentu agar mudah diolah", "data yang ditulis bebas tanpa urutan atau kolom", "data yang hanya dapat dibaca oleh manusia, tidak oleh komputer"], "id": "pg01"}, {"tipe": "pg", "bab": "Konsep Data Terstruktur", "s": "Contoh data terstruktur adalah ...", "o": ["rekaman suara saat rapat OSIS", "kumpulan foto kegiatan class meeting", "tabel nilai berkolom nama dan nilai", "video tutorial memasak di media sosial"], "id": "pg02"}, {"tipe": "pg", "bab": "Konsep Data Terstruktur", "s": "Manfaat utama menyimpan data dalam struktur data yang tepat adalah ...", "o": ["tampilan data menjadi lebih berwarna", "kapasitas penyimpanan menjadi tidak terbatas", "data lebih cepat dicari dan diolah", "komputer tidak perlu dinyalakan lagi"], "id": "pg03"}, {"tipe": "pg", "bab": "List", "s": "Diketahui list buah = [\"apel\", \"jeruk\", \"mangga\", \"pisang\"] dengan indeks dimulai dari 0. Nilai buah[2] adalah ...", "o": ["\"apel\"", "\"jeruk\"", "\"mangga\"", "\"pisang\""], "urut": true, "id": "pg04"}, {"tipe": "pg", "bab": "List", "s": "Dalam operasi CRUD pada list, menambahkan data baru ke dalam list disebut ...", "o": ["Create", "Read", "Update", "Delete"], "urut": true, "id": "pg05"}, {"tipe": "pg", "bab": "List", "s": "List angka = [5, 8, 3]. Dilakukan operasi berurutan: (1) tambah 7 di akhir, (2) hapus 8, (3) ubah elemen indeks 0 menjadi 9. Isi list sekarang adalah ...", "o": ["[9, 3, 7]", "[5, 3, 7]", "[9, 8, 3, 7]", "[9, 7, 3]"], "id": "pg06"}, {"tipe": "pg", "bab": "List", "s": "Wali kelas mengubah status kehadiran Raka dari \"Alpa\" menjadi \"Sakit\" pada daftar hadir. Operasi list yang dilakukan adalah ...", "o": ["Create", "Read", "Update", "Delete"], "urut": true, "id": "pg07"}, {"tipe": "pg", "bab": "List", "s": "Playlist = [A, B, C, D]. Lagu X disisipkan pada indeks 1 (indeks dimulai dari 0). Lagu yang berada pada indeks 3 sekarang adalah ...", "o": ["A", "B", "C", "D"], "urut": true, "id": "pg08"}, {"tipe": "pg", "bab": "List", "s": "List data = [4, 7, 1, 9, 6] (indeks dimulai dari 0). Dilakukan berurutan: (1) hapus elemen indeks 1, (2) sisipkan 5 pada indeks 2, (3) tukar elemen pertama dengan elemen terakhir. Jumlah elemen pada indeks 1 sampai indeks 3 adalah ...", "o": ["14", "15", "19", "20"], "urut": true, "id": "pg09"}, {"tipe": "pg", "bab": "Queue", "s": "Prinsip kerja struktur data queue (antrean) adalah ...", "o": ["LIFO (Last In First Out)", "FIFO (First In First Out)", "FILO (First In Last Out)", "LILO (Last In Last Out)"], "id": "pg10"}, {"tipe": "pg", "bab": "Queue", "s": "Queue kosong dikenai operasi: enqueue A, enqueue B, enqueue C, dequeue, enqueue D, dequeue. Elemen yang berada di depan (front) sekarang adalah ...", "o": ["A", "B", "C", "D"], "urut": true, "id": "pg11"}, {"tipe": "pg", "bab": "Queue", "s": "Printer memproses dokumen dengan queue. Pukul 08.00 masuk berurutan dokumen A (3 menit), B (1 menit), dan C (2 menit). Pukul 08.05 masuk dokumen D (4 menit). Dokumen D selesai dicetak pukul ...", "o": ["08.09", "08.10", "08.13", "08.14"], "urut": true, "id": "pg12"}, {"tipe": "pg", "bab": "Queue", "s": "Contoh penerapan queue dalam kehidupan sehari-hari adalah ...", "o": ["tumpukan buku pelajaran di meja", "fitur undo pada pengolah kata", "dokumen yang menunggu giliran dicetak", "silsilah keluarga dari kakek sampai cucu"], "id": "pg13"}, {"tipe": "pg", "bab": "Queue", "s": "Pada antrean kasir, pelanggan yang dilayani berikutnya selalu diambil dari bagian ...", "o": ["depan (front)", "belakang (rear)", "tengah antrean", "paling atas (top)"], "id": "pg14"}, {"tipe": "pg", "bab": "Queue", "s": "Isi queue dari depan ke belakang: P, Q, R. Dilakukan berurutan: enqueue S, dequeue, enqueue T, dequeue, dequeue, enqueue U. Elemen kedua dari depan sekarang adalah ...", "o": ["R", "S", "T", "U"], "urut": true, "id": "pg15"}, {"tipe": "pg", "bab": "Stack", "s": "Prinsip kerja struktur data stack (tumpukan) adalah ...", "o": ["FIFO (First In First Out)", "LIFO (Last In First Out)", "FCFS (First Come First Serve)", "urut dari terkecil"], "id": "pg16"}, {"tipe": "pg", "bab": "Stack", "s": "Stack kosong dikenai operasi: push 1, push 2, push 3, pop, push 4, pop. Elemen teratas (top) sekarang adalah ...", "o": ["1", "2", "3", "4"], "urut": true, "id": "pg17"}, {"tipe": "pg", "bab": "Stack", "s": "Rani menggambar di sebuah aplikasi. Tombol Undo membatalkan langkah yang paling terakhir dilakukan.\nLangkah Rani:\n1. Menggambar lingkaran\n2. Menggambar kotak\n3. Mewarnai kotak dengan warna merah\n4. Menulis teks\n5. Menekan Undo\n6. Menekan Undo\n7. Menggambar segitiga\n8. Menekan Undo\nGambar yang terlihat sekarang adalah ...", "o": ["lingkaran dan kotak tanpa warna", "lingkaran, kotak merah, dan segitiga", "lingkaran dan segitiga", "lingkaran, kotak merah, dan teks"], "id": "pg18"}, {"tipe": "pg", "bab": "Stack", "s": "Fitur aplikasi yang menerapkan konsep stack adalah ...", "o": ["undo pada aplikasi", "antrean pesan ke server", "daftar kontak urut abjad", "peta rute antarkota"], "id": "pg19"}, {"tipe": "pg", "bab": "Stack", "s": "Pada tumpukan piring di dapur, piring yang pertama kali diambil adalah ...", "o": ["piring yang paling awal diletakkan", "piring yang terakhir diletakkan", "piring yang ada di tengah", "piring yang paling bersih"], "id": "pg20"}, {"tipe": "pg", "bab": "Stack", "s": "Rani membuka halaman web berurutan A → B → C → D. Riwayat tombol Back bekerja seperti stack. Rani menekan Back dua kali, lalu membuka halaman baru E. Jika Rani menekan Back sekali lagi, halaman yang tampil adalah ...", "o": ["A", "B", "C", "D"], "urut": true, "id": "pg21"}, {"tipe": "pg", "bab": "Tree", "s": "Perhatikan struktur tree berikut. Node yang menjadi root adalah ...", "o": ["A", "B", "C", "F"], "gambar": {"tree": {"n": {"A": [200, 30], "B": [110, 100], "C": [290, 100], "D": [60, 170], "E": [160, 170], "F": [290, 170], "G": [240, 240], "H": [340, 240]}, "e": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "F"], ["F", "G"], ["F", "H"]], "arah": false, "w": 400, "h": 270}}, "urut": true, "id": "pg22"}, {"tipe": "pg", "bab": "Tree", "s": "Perhatikan tree berikut. Banyak node daun (leaf) adalah ...", "o": ["3", "4", "5", "6"], "gambar": {"tree": {"n": {"A": [200, 30], "B": [110, 100], "C": [290, 100], "D": [60, 170], "E": [160, 170], "F": [290, 170], "G": [240, 240], "H": [340, 240]}, "e": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "F"], ["F", "G"], ["F", "H"]], "arah": false, "w": 400, "h": 270}}, "urut": true, "id": "pg23"}, {"tipe": "pg", "bab": "Tree", "s": "Perhatikan tree berikut. Parent dari node F adalah ...", "o": ["A", "B", "C", "G"], "gambar": {"tree": {"n": {"A": [200, 30], "B": [110, 100], "C": [290, 100], "D": [60, 170], "E": [160, 170], "F": [290, 170], "G": [240, 240], "H": [340, 240]}, "e": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "F"], ["F", "G"], ["F", "H"]], "arah": false, "w": 400, "h": 270}}, "urut": true, "id": "pg24"}, {"tipe": "pg", "bab": "Tree", "s": "Contoh penerapan struktur data tree pada komputer adalah ...", "o": ["antrean proses yang menunggu CPU", "susunan folder dan subfolder", "riwayat langkah pada fitur undo", "daftar putar lagu di aplikasi musik"], "id": "pg25"}, {"tipe": "pg", "bab": "Tree", "s": "Perhatikan tree berikut. Jika node F beserta seluruh turunannya dihapus, banyak leaf pada tree sekarang adalah ...", "o": ["2", "3", "4", "5"], "gambar": {"tree": {"n": {"A": [200, 30], "B": [110, 100], "C": [290, 100], "D": [60, 170], "E": [160, 170], "F": [290, 170], "G": [240, 240], "H": [340, 240]}, "e": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "F"], ["F", "G"], ["F", "H"]], "arah": false, "w": 400, "h": 270}}, "urut": true, "id": "pg26"}, {"tipe": "pg", "bab": "Graf", "s": "Dua komponen utama penyusun graf adalah ...", "o": ["root dan leaf", "vertex dan edge", "parent dan child", "push dan pop"], "id": "pg27"}, {"tipe": "pg", "bab": "Graf", "s": "Hubungan \"mengikuti\" (follow) di media sosial paling tepat digambarkan dengan ...", "o": ["graf berarah", "graf tidak berarah", "antrean (queue)", "tumpukan (stack)"], "id": "pg28"}, {"tipe": "pg", "bab": "Graf", "s": "Perhatikan graf berikut. Derajat (banyak sisi yang terhubung) simpul R adalah ...", "o": ["1", "2", "3", "4"], "gambar": {"graf": {"n": {"P": [60, 60], "Q": [220, 40], "R": [140, 170], "S": [340, 130], "T": [280, 240]}, "e": [["P", "Q"], ["P", "R"], ["Q", "R"], ["Q", "S"], ["R", "T"], ["S", "T"]], "arah": false, "w": 400, "h": 280}}, "urut": true, "id": "pg29"}, {"tipe": "pg", "bab": "Graf", "s": "Perhatikan graf berikut. Banyak lintasan berbeda dari P ke T tanpa melewati simpul yang sama lebih dari sekali adalah ...", "o": ["2", "3", "4", "5"], "gambar": {"graf": {"n": {"P": [60, 60], "Q": [220, 40], "R": [140, 170], "S": [340, 130], "T": [280, 240]}, "e": [["P", "Q"], ["P", "R"], ["Q", "R"], ["Q", "S"], ["R", "T"], ["S", "T"]], "arah": false, "w": 400, "h": 280}}, "urut": true, "id": "pg30"}, {"tipe": "pg", "bab": "Graf", "s": "Jalan raya dua arah yang menghubungkan beberapa kota paling tepat digambarkan dengan ...", "o": ["graf tidak berarah", "graf berarah", "tumpukan data (stack)", "antrean (queue)"], "id": "pg31"}, {"tipe": "pg", "bab": "Perbandingan Struktur Data", "s": "Puskesmas ingin melayani pasien sesuai urutan kedatangan. Struktur data yang paling tepat adalah ...", "o": ["stack", "queue", "tree", "graf"], "id": "pg32"}, {"tipe": "pg", "bab": "Perbandingan Struktur Data", "s": "Sebuah call center melayani panggilan sesuai urutan masuk. Di menu telepon otomatisnya, penelepon bisa menekan * untuk kembali ke menu sebelumnya. Struktur data yang tepat untuk (1) daftar panggilan dan (2) riwayat menu adalah ...", "o": ["(1) stack, (2) queue", "(1) queue, (2) stack", "(1) queue, (2) queue", "(1) tree, (2) graf"], "id": "pg33"}, {"tipe": "pg", "bab": "Perbandingan Struktur Data", "s": "Struktur organisasi OSIS digambarkan dari ketua, lalu wakil, lalu sekretaris dan bendahara, hingga anggota tiap seksi. Struktur data yang paling tepat adalah ...", "o": ["tree", "queue", "stack", "list"], "id": "pg34"}, {"tipe": "pg", "bab": "Perbandingan Struktur Data", "s": "Aplikasi peta digital menghitung rute antarkota yang saling terhubung. Struktur data yang tepat adalah ...", "o": ["stack", "queue", "list", "graf"], "id": "pg35"}, {"tipe": "aon", "bab": "Konsep Data Terstruktur", "s": "Pilih SEMUA contoh data terstruktur di bawah ini.", "o": ["tabel nilai ulangan berisi kolom nama dan nilai", "kumpulan foto liburan keluarga di galeri ponsel", "daftar kontak berisi kolom nama dan nomor telepon", "rekaman suara wawancara narasumber untuk tugas", "data penjualan kantin dalam spreadsheet"], "id": "aon36"}, {"tipe": "aon", "bab": "List", "s": "List data = [10, 20, 30, 40] (indeks dimulai dari 0). Dilakukan operasi: hapus 20, lalu tambah 50 di akhir. Pilih SEMUA pernyataan yang benar.", "o": ["panjang list sekarang 4", "elemen indeks 1 adalah 30", "elemen terakhir adalah 50", "elemen indeks 0 adalah 20", "40 berada pada indeks 3"], "id": "aon37"}, {"tipe": "aon", "bab": "Queue", "s": "Pilih SEMUA situasi yang menerapkan konsep queue.", "o": ["antrean nasabah di loket bank", "antrean dokumen pada printer", "tumpukan buku yang diambil dari paling atas", "fitur undo untuk membatalkan langkah terakhir", "antrean pesan yang diproses server sesuai urutan masuk"], "id": "aon38"}, {"tipe": "aon", "bab": "Stack", "s": "Stack kosong dikenai operasi: push A, push B, pop, push C, push D. Pilih SEMUA pernyataan yang benar.", "o": ["elemen teratas (top) adalah D", "isi stack dari bawah ke atas: A, C, D", "B sudah tidak ada di dalam stack", "banyak elemen stack adalah 4", "jika dilakukan pop sekali lagi, top menjadi A"], "id": "aon39"}, {"tipe": "aon", "bab": "Tree", "s": "Perhatikan tree berikut. Pilih SEMUA pernyataan yang benar.", "o": ["B dan C adalah sibling (saudara)", "D adalah leaf", "F memiliki 2 child", "A memiliki parent", "E adalah child dari C"], "gambar": {"tree": {"n": {"A": [200, 30], "B": [110, 100], "C": [290, 100], "D": [60, 170], "E": [160, 170], "F": [290, 170], "G": [240, 240], "H": [340, 240]}, "e": [["A", "B"], ["A", "C"], ["B", "D"], ["B", "E"], ["C", "F"], ["F", "G"], ["F", "H"]], "arah": false, "w": 400, "h": 270}}, "id": "aon40"}, {"tipe": "aon", "bab": "Graf", "s": "Perhatikan graf berikut. Pilih SEMUA pernyataan yang benar.", "o": ["P dan Q terhubung langsung", "derajat simpul S adalah 3", "ada lintasan dari P ke T", "Q dan T terhubung langsung", "graf memiliki 5 simpul"], "gambar": {"graf": {"n": {"P": [60, 60], "Q": [220, 40], "R": [140, 170], "S": [340, 130], "T": [280, 240]}, "e": [["P", "Q"], ["P", "R"], ["Q", "R"], ["Q", "S"], ["R", "T"], ["S", "T"]], "arah": false, "w": 400, "h": 280}}, "id": "aon41"}, {"tipe": "aon", "bab": "Perbandingan Struktur Data", "s": "Pilih SEMUA pasangan struktur data dan penerapan yang tepat.", "o": ["Queue – antrean pembelian tiket", "Stack – fitur undo", "Tree – struktur folder komputer", "Graf – urutan lagu dalam playlist", "List – jaringan jalan antarkota"], "id": "aon42"}, {"tipe": "mtf", "bab": "Konsep Data Terstruktur", "s": "Tentukan Benar atau Salah setiap pernyataan tentang data terstruktur berikut.", "o": ["Data terstruktur biasanya disusun dalam baris dan kolom.", "Video rekaman upacara termasuk data terstruktur.", "Data terstruktur memudahkan komputer mencari dan mengurutkan data.", "List, queue, dan stack adalah contoh struktur data."], "id": "mtf43"}, {"tipe": "mtf", "bab": "List", "s": "Tentukan Benar atau Salah setiap pernyataan tentang operasi pada list berikut.", "o": ["Read adalah operasi untuk membaca atau menampilkan data.", "Delete adalah operasi untuk menambah data baru.", "Setiap elemen list dapat diakses melalui indeksnya.", "Mengganti nama siswa yang salah ketik termasuk operasi Update."], "id": "mtf44"}, {"tipe": "mtf", "bab": "Queue", "s": "Queue kosong dikenai operasi: enqueue 5, enqueue 8, dequeue, enqueue 2, enqueue 9, dequeue. Tentukan Benar atau Salah.", "o": ["Elemen di depan (front) sekarang adalah 2.", "Queue sekarang berisi 2 elemen.", "Angka 8 masih berada di dalam queue.", "Elemen yang keluar pertama kali adalah 8."], "id": "mtf45"}, {"tipe": "mtf", "bab": "Stack", "s": "Stack kosong dikenai operasi: push 3, push 7, push 1, pop, push 4, pop, pop. Tentukan Benar atau Salah.", "o": ["Elemen teratas sekarang adalah 3.", "Urutan elemen yang keluar adalah 1, 4, 7.", "Stack sekarang kosong.", "Angka 7 masih berada di dalam stack."], "id": "mtf46"}, {"tipe": "mtf", "bab": "Tree", "s": "Perhatikan struktur folder berikut. Tentukan Benar atau Salah.", "o": ["Root dari struktur ini adalah folder Dokumen.", "Banyak leaf adalah 4.", "Informatika adalah parent dari Sekolah.", "Sekolah dan Pribadi adalah sibling."], "gambar": {"tree": {"n": {"Dokumen": [230, 30], "Sekolah": [130, 100], "Pribadi": [340, 100], "IPA": [60, 175], "Informatika": [200, 175], "foto.jpg": [340, 175], "tugas1.docx": [140, 250], "tugas2.xlsx": [270, 250]}, "e": [["Dokumen", "Sekolah"], ["Dokumen", "Pribadi"], ["Sekolah", "IPA"], ["Sekolah", "Informatika"], ["Pribadi", "foto.jpg"], ["Informatika", "tugas1.docx"], ["Informatika", "tugas2.xlsx"]], "arah": false, "w": 440, "h": 280, "kotak": true}}, "id": "mtf47"}, {"tipe": "mtf", "bab": "Graf", "s": "Graf berarah berikut menggambarkan hubungan \"mengikuti\" di media sosial (panah dari pengikut ke yang diikuti). Tentukan Benar atau Salah.", "o": ["Ana mengikuti Dodi.", "Dodi mengikuti Ana.", "Cici mengikuti Ana.", "Graf ini termasuk graf tidak berarah."], "gambar": {"graf": {"n": {"Ana": [70, 60], "Budi": [280, 60], "Cici": [280, 210], "Dodi": [70, 210]}, "e": [["Ana", "Budi"], ["Budi", "Cici"], ["Cici", "Ana"], ["Ana", "Dodi"]], "arah": true, "w": 360, "h": 270}}, "id": "mtf48"}, {"tipe": "mtf", "bab": "Perbandingan Struktur Data", "s": "Tentukan Benar atau Salah setiap pernyataan tentang perbandingan stack dan queue berikut.", "o": ["Stack mengeluarkan data dari ujung yang sama dengan tempat data dimasukkan.", "Queue mengeluarkan data dari depan dan menambah data di belakang.", "Stack dan queue sama-sama menganut prinsip FIFO.", "Pop pada stack sama dengan dequeue pada queue."], "id": "mtf49"}, {"tipe": "mtf", "bab": "Perbandingan Struktur Data", "s": "Sebuah aplikasi ojek online memakai beberapa struktur data. Tentukan Benar atau Salah setiap pemilihan berikut.", "o": ["Pesanan yang masuk diproses sesuai urutan masuk menggunakan queue.", "Peta jalan untuk mencari rute disimpan sebagai graf.", "Kategori menu restoran yang bertingkat (Makanan → Nasi → Nasi Goreng) disimpan sebagai stack.", "Daftar riwayat perjalanan pengguna yang berurutan dapat disimpan sebagai list."], "id": "mtf50"}];
+const BAB=["Konsep Data Terstruktur", "List", "Queue", "Stack", "Tree", "Graf", "Perbandingan Struktur Data"];
+const SARAN={"Konsep Data Terstruktur": "Ulangi pengertian data terstruktur dan alasan data perlu disusun dengan format tertentu agar mudah dicari dan diolah.", "List": "Latih lagi operasi pada list: menambah, menyisipkan, menghapus, dan mengambil elemen berdasarkan posisinya.", "Queue": "Ingat prinsip FIFO (yang masuk pertama, keluar pertama). Latih menelusuri isi antrean setelah enqueue dan dequeue.", "Stack": "Ingat prinsip LIFO (yang masuk terakhir, keluar pertama). Latih menelusuri isi stack setelah push dan pop, misalnya pada fitur Undo.", "Tree": "Ulangi istilah root, parent, child, dan leaf, lalu latih membaca struktur bertingkat seperti folder atau silsilah.", "Graf": "Ulangi istilah simpul (node) dan sisi (edge), lalu latih membaca graf seperti peta rute dan jaringan pertemanan.", "Perbandingan Struktur Data": "Bandingkan kapan memakai list, queue, stack, tree, dan graf dengan contoh kasus sehari-hari."};
 const SOAL_LAMA={pg18:{"tipe": "pg", "bab": "Stack", "s": "Untuk memeriksa pasangan kurung pada rumus, komputer memakai stack: setiap \"(\" di-push dan setiap \")\" melakukan pop. Pada rumus ((a+b)*(c-d)), banyak elemen paling banyak di dalam stack pada saat yang sama adalah ...", "o": ["1", "2", "3", "4"], "urut": true, "id": "pg18"}};
 const KELAS=['VIII-A','VIII-B','VIII-C','VIII-D','VIII-E','VIII-F','VIII-G'];
 const NAMA_TIPE={pg:'Pilihan Ganda',aon:'Pilihan Ganda Kompleks',mtf:'Benar–Salah'};
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=s=>esc(s).replace(/`([^`]+)`/g,'<code>$1</code>');
+const kodeBlok=q=>q.kode?`<pre class="kode">${esc(q.kode)}</pre>`:'';
 const LS={get(k,d){try{const v=localStorage.getItem('sas8_'+k);return v?JSON.parse(v):d;}catch(e){return d;}},set(k,v){try{localStorage.setItem('sas8_'+k,JSON.stringify(v));}catch(e){}},del(k){try{localStorage.removeItem('sas8_'+k);}catch(e){}}};
 function acak(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 
 async function post(body,retry=2){
   for(let i=0;i<=retry;i++){
-    try{const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body)}); if(!r.ok)throw 0; return await r.json();}
+    try{const ac=new AbortController(), tm=setTimeout(()=>ac.abort(),body.aksi==='kirim'?40000:20000); const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(body),signal:ac.signal}); clearTimeout(tm); if(!r.ok)throw 0; return await r.json();}
     catch(e){ if(i===retry) return {ok:false,jaringan:true}; await new Promise(r=>setTimeout(r,1200*(i+1))); }
   }
 }
-async function getMurid(kelas){ const r=await fetch(API+(API.includes('?')?'&':'?')+'aksi=murid&kelas='+encodeURIComponent(kelas)); return r.json(); }
+async function getMurid(kelas,kode){ const r=await fetch(API+(API.includes('?')?'&':'?')+'aksi=murid&kelas='+encodeURIComponent(kelas)+'&kode='+encodeURIComponent(kode)); return r.json(); }
 
 /* ---------- diagram ---------- */
 function svgDiagram(g){
@@ -146,18 +158,27 @@ function viewLogin(pesan){
   layar='login'; pantau=false; header();
   $('#app').innerHTML=`<div class="card narrow"><h2>Latihan SAS Informatika</h2><p class="mut sm" style="margin-top:-4px">Kelas VIII · Himpunan Data Terstruktur · 50 soal · ${DURASI_MENIT} menit</p>
   <label class="f">Kelas</label><select class="f" id="lKelas"><option value="">— pilih kelas —</option>${KELAS.map(k=>`<option>${k}</option>`).join('')}</select>
-  <label class="f">Nama</label><select class="f" id="lNama" disabled><option value="">— pilih kelas dulu —</option></select>
+  <label class="f">Kode kelas</label><input class="f" id="lKode" maxlength="4" autocomplete="off" spellcheck="false" placeholder="4 karakter dari guru">
+  <label class="f">Nama</label><select class="f" id="lNama" disabled><option value="">— isi kelas &amp; kode dulu —</option></select>
   <button class="btn pri big" id="lMasuk" style="width:100%;margin-top:16px">Mulai latihan</button>
   <button class="btn" id="lRiwayat" style="width:100%;margin-top:8px">📄 Lihat hasil &amp; pembahasan sebelumnya</button>
   <div id="lMsg">${pesan?`<div class="msg info">${esc(pesan)}</div>`:''}</div></div>`;
   const kel=$('#lKelas'), nm=$('#lNama'), msg=$('#lMsg');
-  kel.onchange=async()=>{ nm.disabled=true; nm.innerHTML='<option>Memuat…</option>'; if(!kel.value){nm.innerHTML='<option value="">— pilih kelas dulu —</option>';return;}
-    try{ const r=await getMurid(kel.value); if(!r.ok)throw 0; nm.innerHTML='<option value="">— pilih nama —</option>'+r.data.map(m=>`<option value="${m.absen}">${m.absen}. ${esc(m.nama)}</option>`).join(''); nm.disabled=false; }
-    catch(e){ nm.innerHTML='<option value="">Gagal memuat</option>'; msg.innerHTML='<div class="msg no">Tidak bisa terhubung ke server. Periksa internet lalu pilih kelas lagi.</div>'; } };
+  const kd=$('#lKode'); let muatKe=0;
+  const muat=async()=>{ msg.innerHTML=''; nm.disabled=true; const kode=kd.value.trim().toUpperCase();
+    if(!kel.value||kode.length<4){ nm.innerHTML='<option value="">— isi kelas &amp; kode dulu —</option>'; return; }
+    nm.innerHTML='<option>Memuat…</option>'; const ini=++muatKe;
+    try{ const r=await getMurid(kel.value,kode); if(ini!==muatKe)return;
+      if(!r.ok){ nm.innerHTML='<option value="">— kode belum benar —</option>'; msg.innerHTML=`<div class="msg no">${esc(r.pesan||'Gagal memuat daftar nama.')}</div>`; return; }
+      LS.set('kode_'+kel.value,kode);
+      nm.innerHTML='<option value="">— pilih nama —</option>'+r.data.map(m=>`<option value="${m.absen}">${m.absen}. ${esc(m.nama)}</option>`).join(''); nm.disabled=false; }
+    catch(e){ if(ini!==muatKe)return; nm.innerHTML='<option value="">Gagal memuat</option>'; msg.innerHTML='<div class="msg no">Tidak bisa terhubung ke server. Periksa internet lalu coba lagi.</div>'; } };
+  kel.onchange=()=>{ kd.value=LS.get('kode_'+kel.value,''); muat(); };
+  kd.oninput=()=>{ kd.value=kd.value.toUpperCase().replace(/[^A-Z0-9]/g,''); muat(); };
   $('#lMasuk').onclick=()=>{ if(!kel.value||!nm.value){ msg.innerHTML='<div class="msg no">Pilih kelas dan nama dulu.</div>'; return; }
-    viewPetunjuk({kelas:kel.value,absen:+nm.value,nama:nm.options[nm.selectedIndex].text.replace(/^\d+\.\s*/,'')}); };
+    viewPetunjuk({kelas:kel.value,absen:+nm.value,nama:nm.options[nm.selectedIndex].text.replace(/^\d+\.\s*/,''),kode:kd.value}); };
   $('#lRiwayat').onclick=()=>{ if(!kel.value||!nm.value){ msg.innerHTML='<div class="msg no">Pilih kelas dan nama dulu.</div>'; return; }
-    viewRiwayat({kelas:kel.value,absen:+nm.value,nama:nm.options[nm.selectedIndex].text.replace(/^\d+\.\s*/,'')}); };
+    viewRiwayat({kelas:kel.value,absen:+nm.value,nama:nm.options[nm.selectedIndex].text.replace(/^\d+\.\s*/,''),kode:kd.value}); };
 }
 
 function viewPetunjuk(m){
@@ -169,18 +190,19 @@ function viewPetunjuk(m){
    <li>Ujian berjalan dalam <b>layar penuh</b>. Menekan <b>Esc</b>, pindah tab/aplikasi, klik kanan, menyalin/menempel, atau membuka Developer Tools dihitung <b>pelanggaran</b>.</li>
    <li>Setiap pelanggaran membuat soal tertutup sementara, sedangkan <b>waktu tetap berjalan</b>. Pada <b>pelanggaran ke-${MAKS_LANGGAR}</b>, jawaban terkirim otomatis dan ujian selesai.</li>
    <li>Jawaban tersimpan otomatis di perangkat ini. Tandai <b>Ragu-ragu</b> untuk soal yang ingin diperiksa lagi.</li>
-   <li>Setelah selesai, kamu akan melihat nilai dan pembahasan setiap soal.</li>
+   <li>Setelah selesai, kamu langsung melihat nilai dan umpan balik per materi. Kunci dan pembahasan per soal dibuka guru setelah semua kelas selesai.</li>
   </ul>
   <div class="row" style="justify-content:space-between;margin-top:14px"><button class="btn" id="bKembali">← Ganti nama</button><button class="btn pri big" id="bMulai">Mulai ujian (layar penuh)</button></div><div id="pMsg"></div></div>`;
   $('#bKembali').onclick=()=>viewLogin();
   $('#bMulai').onclick=async()=>{ const b=$('#bMulai'); b.disabled=true; b.innerHTML='<span class="spin"></span> Menyiapkan…';
     try{ await masukLayarPenuh(); }catch(e){ b.disabled=false; b.textContent='Mulai ujian (layar penuh)'; $('#pMsg').innerHTML='<div class="msg no">Layar penuh gagal diaktifkan. Gunakan Chrome di laptop, lalu tekan tombol lagi.</div>'; return; }
-    const r=await post({aksi:'mulai',kelas:m.kelas,absen:m.absen});
-    if(!r.ok){ await keluarLayarPenuh(); b.disabled=false; b.textContent='Mulai ujian (layar penuh)'; $('#pMsg').innerHTML=`<div class="msg no">${esc(r.pesan||'Tidak bisa terhubung ke server. Coba lagi.')}</div>`; return; }
+    const aidBaru=(crypto.randomUUID?crypto.randomUUID().replace(/-/g,''):Math.random().toString(36).slice(2)+Date.now().toString(36)).slice(0,24);
+    const r={aid:aidBaru,nama:m.nama,ke:''};
+    post({aksi:'mulai',aid:aidBaru,kelas:m.kelas,absen:m.absen,kode:m.kode,mulai:Date.now()},3);
     const urut=[...acak(SOAL.filter(q=>q.tipe==='pg')),...acak(SOAL.filter(q=>q.tipe==='aon')),...acak(SOAL.filter(q=>q.tipe==='mtf'))].map(q=>SOAL.indexOf(q));
     const opsi={}; SOAL.forEach(q=>{ const idx=q.o.map((_,i)=>i); opsi[q.id]=(q.urut?idx:acak(idx)); });
     const now=Date.now();
-    S={aid:r.aid,kelas:m.kelas,absen:m.absen,nama:r.nama||m.nama,ke:r.ke,mulai:now,batas:now+DURASI_MENIT*60000,urut,opsi,jawab:{},ragu:{},pelanggaran:0,lamaKeluar:0,cur:0};
+    S={aid:r.aid,kode:m.kode,kelas:m.kelas,absen:m.absen,nama:r.nama||m.nama,ke:r.ke,mulai:now,batas:now+DURASI_MENIT*60000,urut,opsi,jawab:{},ragu:{},pelanggaran:0,lamaKeluar:0,cur:0};
     simpanLokal(); viewUjian(); };
 }
 
@@ -238,12 +260,13 @@ function konfirmasi(){
 }
 async function kirim(alasan){
   if(selesai||layar==='kirim')return; layar='kirim'; pantau=false; hapusJeda(); header();
-  $('#app').innerHTML='<div class="card narrow" style="text-align:center"><h2><span class="spin" style="border-color:#8886;border-top-color:#333"></span> Mengirim jawaban…</h2></div>';
-  const body={aksi:'kirim',aid:S.aid,jawab:S.jawab,alasan,pelanggaran:S.pelanggaran,lamaKeluar:S.lamaKeluar,detik:Math.round((Math.min(Date.now(),S.batas)-S.mulai)/1000)};
+  $('#app').innerHTML='<div class="card narrow" style="text-align:center"><h2><span class="spin" style="border-color:#8886;border-top-color:#333"></span> Mengirim jawaban…</h2><p class="sm mut">Jangan tutup halaman ini. Jika lebih dari 1 menit, jawabanmu tetap aman dan akan dikirim ulang otomatis.</p></div>';
+  const body={aksi:'kirim',aid:S.aid,kelas:S.kelas,absen:S.absen,mulai:S.mulai,jawab:S.jawab,alasan,pelanggaran:S.pelanggaran,lamaKeluar:S.lamaKeluar,detik:Math.round((Math.min(Date.now(),S.batas)-S.mulai)/1000)};
   let r=await post(body,3);
-  while(r.jaringan){
+  let ulang=0;
+  while(r.jaringan||(!r.ok&&r.coba&&ulang<20)){ ulang++;
     $('#app').innerHTML='<div class="card narrow"><h2>Menunggu koneksi…</h2><p>Jawabanmu aman tersimpan di perangkat ini dan akan dikirim otomatis saat internet kembali. Jangan tutup halaman ini.</p></div>';
-    await new Promise(x=>setTimeout(x,5000)); r=await post(body,0);
+    await new Promise(x=>setTimeout(x,3000+Math.random()*4000)); r=await post(body,0);
   }
   selesai=true; await keluarLayarPenuh();
   if(!r.ok){ $('#app').innerHTML=`<div class="card narrow"><h2>Gagal mengirim</h2><p>${esc(r.pesan||'')}</p></div>`; return; }
@@ -251,16 +274,32 @@ async function kirim(alasan){
 }
 
 /* ---------- HASIL ---------- */
+function umpanBalik(r){
+  const n=r.nilai, kat=n>=85?['hi','Sangat baik! Kamu siap menghadapi SAS. Pertahankan dengan mengulang materi sekilas sebelum ujian.']:n>=70?['mid','Sudah baik. Ulangi materi yang masih merah di bawah, lalu coba latihan lagi.']:['lo','Perlu belajar lagi. Pelajari saran di bawah, lalu kerjakan latihan ini sekali lagi.'];
+  const urut=BAB.filter(b=>r.perBab[b]);
+  const pc=b=>{const [x,t]=r.perBab[b];return Math.round(x/t*100);};
+  const lemah=urut.filter(b=>pc(b)<70).sort((a,b)=>pc(a)-pc(b));
+  if(lemah.length&&n>=85) kat[1]='Sangat baik! Nilaimu sudah tinggi, tetapi masih ada materi yang perlu diulang sebelum SAS:';
+  else if(lemah.length&&n>=70) kat[1]='Sudah baik. Ulangi materi berikut, lalu coba latihan lagi:';
+  else if(lemah.length) kat[1]='Perlu belajar lagi. Mulailah dari materi berikut, lalu kerjakan latihan ini sekali lagi:';
+  let h=`<div class="fb ${kat[0]}"><b>Umpan balik:</b> ${kat[1]}`;
+  if(lemah.length) h+=`<ul class="saran">${lemah.map(b=>`<li><b>${esc(b)} (${pc(b)}%)</b><br>${esc(SARAN[b]||'')}</li>`).join('')}</ul>`;
+  else h+='<div style="margin-top:6px">Semua materi sudah di atas 70%. Mantap!</div>';
+  h+='</div>';
+  h+=`<b>Penguasaan per materi</b><div class="bars">${urut.map(b=>{const [x,t]=r.perBab[b],p=pc(b);return `<div class="b"><span>${esc(b)}</span><div class="t"><i class="${p<70?'lo':p>=85?'ok':''}" style="width:${p}%"></i></div><span>${p}%</span></div>`;}).join('')}</div>`;
+  return h;
+}
 function viewHasil(r,alasan,s){
   layar='hasil';
   const per=r.rincian;
   let h=`<div class="card mid"><h2>Hasil Latihan SAS</h2><p class="mut" style="margin-top:-6px">${esc(s.nama)} · ${esc(s.kelas)} · percobaan ke-${r.ke}${r.selesai?' · '+esc(tgl(r.selesai)):''}${alasan!=='Dikirim murid'&&alasan!=='Selesai'?` · <b style="color:var(--no)">${esc(alasan)}</b>`:''}</p>
    <div class="row" style="gap:28px;align-items:flex-end"><div><div class="mut sm">Nilai</div><div class="big">${r.nilai}</div></div><div class="mut">Skor ${String(r.skor).replace('.',',')} dari ${r.maks}</div></div>
    <div class="stat"><div>Pilihan ganda<b>${per.pg[0]}/${per.pg[1]}</b><span class="sm mut">1 poin per soal</span></div><div>PG kompleks<b>${per.aon[0]}/${per.aon[1]}</b><span class="sm mut">2 poin, harus tepat semua</span></div><div>Benar–salah<b>${String(per.mtf[0]).replace('.',',')}/${per.mtf[1]}</b><span class="sm mut">0,5 poin per pernyataan</span></div><div>Pelanggaran<b>${s.pelanggaran}</b><span class="sm mut">dari ${MAKS_LANGGAR}</span></div></div>
-   <b>Penguasaan per materi</b><div class="bars">${Object.entries(r.perBab).map(([b,[x,t]])=>`<div class="b"><span>${esc(b)}</span><div class="t"><i style="width:${x/t*100}%"></i></div><span>${Math.round(x/t*100)}%</span></div>`).join('')}</div>
+   ${umpanBalik(r)}
    <div class="row noprint" style="margin-top:14px"><button class="btn pri" id="bUlang">Kerjakan lagi (soal diacak)</button><button class="btn" id="bPdf">🖨️ Simpan sebagai PDF</button><button class="btn" id="bRiw">📄 Hasil lainnya</button></div></div>
    <div class="card mid"><h2>Pembahasan</h2>`;
-  s.urut.forEach((si,n)=>{ const q0=SOAL[si], q=((r.versiLama||[]).includes(q0.id)&&SOAL_LAMA[q0.id])||q0, d=r.detail[q.id], a=s.jawab[q.id], perm=s.opsi[q.id];
+  if(!r.detail) h+='<div class="msg info">🔒 Kunci jawaban dan pembahasan per soal akan dibuka guru setelah semua kelas selesai mengerjakan. Nanti lihat lewat tombol <b>Lihat hasil &amp; pembahasan sebelumnya</b>. Sementara itu, pelajari dulu materi yang masih merah di atas.</div>';
+  else s.urut.forEach((si,n)=>{ const q0=SOAL[si], q=((r.versiLama||[]).includes(q0.id)&&SOAL_LAMA[q0.id])||q0, d=r.detail[q.id], a=s.jawab[q.id], perm=s.opsi[q.id];
     let o='';
     if(q.tipe==='pg') o=perm.map((oi,j)=>`<div class="o ${oi===d.k?'k':(oi===a?'x':'')}">${'ABCD'[j]}. ${esc(q.o[oi])}${oi===a?' <b>← jawabanmu</b>':''}</div>`).join('');
     else if(q.tipe==='aon'){ const pil=new Set(a||[]), kk=new Set(d.k); o=perm.map(oi=>`<div class="o ${kk.has(oi)?'k':(pil.has(oi)?'x':'')}">${kk.has(oi)?'✔':'✘'} ${esc(q.o[oi])}${pil.has(oi)?' <b>← kamu pilih</b>':''}</div>`).join(''); }
@@ -269,9 +308,9 @@ function viewHasil(r,alasan,s){
   });
   h+='</div>';
   $('#app').innerHTML=h; window.scrollTo(0,0);
-  $('#bUlang').onclick=()=>{ selesai=false; viewPetunjuk({kelas:s.kelas,absen:s.absen,nama:s.nama}); };
+  $('#bUlang').onclick=()=>{ selesai=false; viewPetunjuk({kelas:s.kelas,absen:s.absen,nama:s.nama,kode:s.kode}); };
   $('#bPdf').onclick=()=>{ const t=document.title; document.title=`Hasil Latihan SAS - ${s.nama} - ${s.kelas} - percobaan ${r.ke}`; window.print(); setTimeout(()=>document.title=t,1000); };
-  $('#bRiw').onclick=()=>{ selesai=false; viewRiwayat({kelas:s.kelas,absen:s.absen,nama:s.nama}); };
+  $('#bRiw').onclick=()=>{ selesai=false; viewRiwayat({kelas:s.kelas,absen:s.absen,nama:s.nama,kode:s.kode}); };
 }
 
 const tgl=x=>{ try{ return new Date(x).toLocaleString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){ return x; } };
@@ -280,16 +319,16 @@ async function viewRiwayat(m){
   $('#app').innerHTML=`<div class="card mid"><h2>Hasil sebelumnya</h2><p class="mut" style="margin-top:-6px">${esc(m.nama)} · ${esc(m.kelas)}</p><div id="rList"><p><span class="spin" style="border-color:#8886;border-top-color:#333"></span> Memuat…</p></div>
    <div class="row" style="margin-top:14px"><button class="btn" id="rBack">← Kembali</button><button class="btn pri" id="rMulai">Mulai latihan baru</button></div></div>`;
   $('#rBack').onclick=()=>viewLogin(); $('#rMulai').onclick=()=>viewPetunjuk(m);
-  let r; try{ r=await fetch(API+(API.includes('?')?'&':'?')+'aksi=riwayat&kelas='+encodeURIComponent(m.kelas)+'&absen='+m.absen).then(x=>x.json()); }catch(e){ r={ok:false}; }
-  if(!r.ok){ $('#rList').innerHTML='<div class="msg no">Tidak bisa terhubung ke server. Coba lagi.</div>'; return; }
+  let r; try{ r=await fetch(API+(API.includes('?')?'&':'?')+'aksi=riwayat&kelas='+encodeURIComponent(m.kelas)+'&absen='+m.absen+'&kode='+encodeURIComponent(m.kode||'')).then(x=>x.json()); }catch(e){ r={ok:false}; }
+  if(!r.ok){ $('#rList').innerHTML=`<div class="msg no">${esc(r.pesan||'Tidak bisa terhubung ke server. Coba lagi.')}</div>`; return; }
   if(!r.data.length){ $('#rList').innerHTML='<p class="mut">Belum ada latihan yang selesai dikerjakan.</p>'; return; }
   $('#rList').innerHTML='<table class="tf"><tr><th>Percobaan</th><th>Selesai</th><th>Nilai</th><th></th></tr>'+r.data.map(x=>`<tr><td>Ke-${x.ke}${x.status!=='Selesai'?`<div class="sm" style="color:var(--no)">${esc(x.status)}</div>`:''}</td><td class="sm">${esc(tgl(x.selesai))}</td><td><b style="font-size:20px">${x.nilai}</b></td><td class="c"><button class="btn" data-aid="${esc(x.aid)}">Buka</button></td></tr>`).join('')+'</table>';
   $$('#rList [data-aid]').forEach(b=>b.onclick=async()=>{ b.disabled=true; b.innerHTML='<span class="spin" style="border-color:#8886;border-top-color:#333"></span>';
-    let h; try{ h=await fetch(API+(API.includes('?')?'&':'?')+'aksi=hasil&aid='+encodeURIComponent(b.dataset.aid)).then(x=>x.json()); }catch(e){ h={ok:false}; }
-    if(!h.ok){ b.disabled=false; b.textContent='Buka'; return; }
+    let h; try{ h=await fetch(API+(API.includes('?')?'&':'?')+'aksi=hasil&aid='+encodeURIComponent(b.dataset.aid)+'&kode='+encodeURIComponent(m.kode||'')).then(x=>x.json()); }catch(e){ h={ok:false}; }
+    if(!h.ok){ b.disabled=false; b.textContent='Buka'; if(h.pesan) $('#rList').insertAdjacentHTML('afterbegin',`<div class="msg no">${esc(h.pesan)}</div>`); return; }
     const urut=[...SOAL.filter(q=>q.tipe==='pg'),...SOAL.filter(q=>q.tipe==='aon'),...SOAL.filter(q=>q.tipe==='mtf')].map(q=>SOAL.indexOf(q));
     const opsi={}; SOAL.forEach(q=>opsi[q.id]=q.o.map((_,i)=>i));
-    viewHasil(h,h.status,{nama:m.nama,kelas:m.kelas,absen:m.absen,urut,opsi,jawab:h.jawab||{},pelanggaran:h.pelanggaran}); });
+    viewHasil(h,h.status,{nama:m.nama,kelas:m.kelas,absen:m.absen,kode:m.kode,urut,opsi,jawab:h.jawab||{},pelanggaran:h.pelanggaran}); });
 }
 
 /* ---------- TIMER ---------- */
@@ -321,7 +360,7 @@ async function langgar(jenis,saatJeda){
   const t=Date.now(); if(t-terakhir<2500)return; terakhir=t;
   if(jeda) jenis+=' (saat ujian dijeda)'; else { jeda=true; keluarAt=t; }
   S.pelanggaran+=1; simpanLokal(); header();
-  post({aksi:'langgar',aid:S.aid,jenis,ke:S.pelanggaran},2);
+  post({aksi:'langgar',aid:S.aid,kelas:S.kelas,absen:S.absen,nama:S.nama,jenis,ke:S.pelanggaran},2);
   if(S.pelanggaran>=MAKS_LANGGAR){ hapusJeda(); return kirim(`Pelanggaran ke-${MAKS_LANGGAR}`); }
   tampilJeda(`<h2 style="color:var(--no)">Pelanggaran ${S.pelanggaran}/${MAKS_LANGGAR}</h2><p><b>${esc(jenis)}</b></p>
    <p>Soal ditutup sementara dan <b>waktu tetap berjalan</b>. Selama layar ini tampil, pindah tab atau aplikasi juga dihitung pelanggaran.</p>
@@ -351,11 +390,17 @@ window.addEventListener('beforeunload',e=>{ if(S&&layar==='ujian'&&!selesai){ e.
 /* ---------- MULAI ---------- */
 if(API.startsWith('__')){ $('#app').innerHTML='<div class="card narrow"><h2>Alamat server belum diatur</h2></div>'; return; }
 if(S&&S.aid){
+  $('#app').innerHTML='<div class="card narrow" style="text-align:center"><h2><span class="spin" style="border-color:#8886;border-top-color:#333"></span> Memeriksa sesi…</h2></div>';
+  (async()=>{ let c=null; try{ const ac=new AbortController(); setTimeout(()=>ac.abort(),20000); c=await fetch(API+(API.includes('?')?'&':'?')+'aksi=cek&aid='+encodeURIComponent(S.aid),{signal:ac.signal}).then(x=>x.json()); }catch(e){}
+  if(c&&c.ok&&c.selesai){ selesai=true; const s0=S; LS.del('sesi'); viewHasil(c,c.status||'Selesai',s0); S=null; header(); return; }
+  tampilLanjut(); })();
+} else viewLogin();
+function tampilLanjut(){
   layar='lanjut'; header();
   $('#app').innerHTML=`<div class="card narrow" style="text-align:center"><h2>Lanjutkan ujian</h2><p>${esc(S.nama)} · ${esc(S.kelas)}</p><p class="sm mut">Halaman sempat ditutup atau dimuat ulang. Waktu tetap berjalan.</p><button class="btn pri big" id="bLanjutkan">Lanjutkan (layar penuh)</button><div id="lzMsg"></div></div>`;
   $('#bLanjutkan').onclick=async()=>{ try{ await masukLayarPenuh(); }catch(e){ $('#lzMsg').innerHTML='<div class="msg no">Layar penuh gagal diaktifkan. Tekan tombol lagi.</div>'; return; }
     if(Date.now()>=S.batas) return kirim('Waktu habis'); viewUjian(); terakhir=0; langgar('Memuat ulang / menutup halaman'); };
-} else viewLogin();
+}
 })();
 </script>
 </body>
